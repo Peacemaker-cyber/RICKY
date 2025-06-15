@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PEACE-MD SESSION</title>
+
+  <!-- Meta & SEO -->
+  <meta name="description" content="Generate WhatsApp Pair/QR Code sessions for PEACE-MD bot. Fast, secure, and easy.">
+  <meta property="og:title" content="PEACE-MD SESSION">
+  <meta property="og:image" content="https://files.catbox.moe/n0dgjr.jpg">
+  <meta name="theme-color" content="#32CD32" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://files.catbox.moe/your-logo.ico" type="image/x-icon">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://files.catbox.moe/n0dgjr.jpg') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -3;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: -2;
+    }
+
+    .bubbles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      border-radius: 50%;
+      opacity: 0.3;
+      background: radial-gradient(circle, #00ff99 0%, #00ccff 100%);
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 0.3; }
+      100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
+    }
+
+    .layer-box {
+      background: rgba(0, 0, 0, 0.35);
+      border-radius: 15px;
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .header-layer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 10px 15px;
+    }
+
+    .header-title {
+      font-size: 20px;
+      font-weight: bold;
+      background: linear-gradient(to right, orange, #32CD32);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 4px #000;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .time-text {
+      position: absolute;
+      left: 10px;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+
+    .battery {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      right: 10px;
+      height: 20px;
+    }
+
+    .battery-body {
+      width: 35px;
+      height: 18px;
+      border: 2px solid white;
+      position: relative;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: transparent;
+    }
+
+    .battery-level {
+      height: 100%;
+      background-color: #00ff00;
+      border-radius: 2px 0 0 2px;
+      transition: width 0.3s ease;
+    }
+
+    .battery-cap {
+      position: absolute;
+      right: -6px;
+      top: 4px;
+      width: 4px;
+      height: 8px;
+      background-color: white;
+      border-radius: 1px;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
+      }
+      50% {
+        text-shadow: 0 0 15px #00ffcc, 0 0 30px #00ffcc;
+      }
+    }
+
+    .btn {
+      background: linear-gradient(to right, #ff6600, #32cd32);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin: 10px 0;
+      width: 220px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 13px;
+      color: #ccc;
+      animation: pulse 3s infinite;
+      text-shadow: 0 0 5px #32cd32;
+    }
+
+    a.button span {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(to right, red, #ff6600);
+      color: white;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    .music-icon {
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .bar {
+      display: inline-block;
+      width: 3px;
+      height: 10px;
+      margin: 0 1px;
+      background: #fff;
+      animation: bounce 1s infinite ease-in-out;
+    }
+
+    .bar:nth-child(1) { animation-delay: 0s; }
+    .bar:nth-child(2) { animation-delay: 0.2s; }
+    .bar:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 100% { height: 10px; }
+      50% { height: 20px; }
+    }
+
+    .music-icon.hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bubbles" id="bubbles-container"></div>
+
+  <!-- Header -->
+  <div class="layer-box header-layer">
+    <div class="time-text" id="phone-time">--:--</div>
+    <div class="header-title">PEACE-MD SESSION</div>
+    <div class="battery" id="battery-container">
+      <div class="battery-body">
+        <div class="battery-level" id="battery-level" style="width: 100%;"></div>
+        <div class="battery-cap"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Buttons -->
+  <div class="layer-box">
+    <button class="btn" onclick="window.open('/qr', '_blank')" aria-label="Open QR Code Generator">QR-CODE</button><br>
+    <button class="btn" onclick="window.open('/pair', '_blank')" aria-label="Open Pairing Code Generator">PAIRING-CODE</button><br>
+    <button class="btn" onclick="window.open('https://github.com/Peacemaker-Cyber/PEACE-MD/fork', '_blank', 'noopener,noreferrer')" aria-label="Fork on GitHub">FORK PEACE MD</button><br/>
+    <button class="btn" onclick="window.open('https://whatsapp.com/channel/0029VbA9YD323n3ko5xL7J1e', '_blank', 'noopener,noreferrer')" aria-label="Visit WhatsApp Channel">WHATSAPP</button><br/>
+    <button class="btn" id="music-button" aria-label="Toggle Background Music">
+      <span id="music-label">PLAY MUSIC</span>
+      <span id="music-icon" class="music-icon hidden">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </span>
+    </button>
+  </div>
+
+  <!-- Audio -->
+  <audio id="bg-music" loop>
+    <source src="https://files.catbox.moe/09ku2f.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Error Help -->
+  <div class="layer-box">
+    <p>FACE ANY ISSUES CLICK ERROR BUTTON</p>
+    <a href="https://wa.me/254752818245" class="button" target="_blank" rel="noopener noreferrer"><span>ERROR</span></a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    PEACEMAKER SYSTEMS &copy; <span id="currentYear"></span>
+  </div>
+
+  <script>
+    // Time
+    setInterval(() => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('phone-time').textContent = `${hours}:${minutes}`;
+    }, 1000);
+
+    // Battery level (with fallback)
+    if (navigator.getBattery) {
+      navigator.getBattery().then(battery => {
+        const updateBattery = () => {
+          const level = battery.level * 100;
+          document.getElementById('battery-level').style.width = `${level}%`;
+        };
+        updateBattery();
+        battery.addEventListener('levelchange', updateBattery);
+      });
+    } else {
+      document.getElementById('battery-container').style.display = 'none';
+    }
+
+    // Bubbles
+    const container = document.getElementById('bubbles-container');
+    for (let i = 0; i < 20; i++) {
+      const bubble = document.createElement('div');
+      bubble.classList.add('bubble');
+      const size = Math.random() * 20 + 10;
+      bubble.style.width = `${size}px`;
+      bubble.style.height = `${size}px`;
+      bubble.style.left = `${Math.random() * 100}%`;
+      bubble.style.animationDuration = `${5 + Math.random() * 10}s`;
+      bubble.style.animationDelay = `${Math.random() * 10}s`;
+      container.appendChild(bubble);
+    }
+
+    // Footer year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Music toggle
+    const musicBtn = document.getElementById('music-button');
+    const music = document.getElementById('bg-music');
+    const musicLabel = document.getElementById('music-label');
+    const musicIcon = document.getElementById('music-icon');
+    let isPlaying = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        music.pause();
+        musicLabel.textContent = 'PLAY MUSIC';
+        musicIcon.classList.add('hidden');
+      } else {
+        music.play().catch(() => {
+          alert('Please interact with the page to enable audio.');
+        });
+        musicLabel.textContent = 'PAUSE MUSIC';
+        musicIcon.classList.remove('hidden');
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
+</body>
+</html>
