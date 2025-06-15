@@ -75,7 +75,7 @@ var randomItem = selectRandomItem(items);
                         const { upload } = require('./mega');
                         const mega_url = await upload(fs.createReadStream(rf), `${sock.user.id}.json`);
                         const string_session = mega_url.replace('https://mega.nz/file/', '');
-                        let md = "PEACE~" + string_session;
+                        let md = "RICKY~" + string_session;
                         let code = await sock.sendMessage(sock.user.id, { text: md });
                         let desc = `*Hello there User!* 
 
@@ -83,19 +83,19 @@ var randomItem = selectRandomItem(items);
  *NOTICE🔔*
 *To avoid disconnections join our channel below*
 
-https://whatsapp.com/channel/0029VbA9YD323n3ko5xL7J1e
+https://whatsapp.com/channel/0029Vb68QfjADTOJIErjjq3i
 
 Our Bot repository 
 https://github.com/Peacemaker-cyber/PEACE-MD
 
-> *Regards Peacemaker*`; 
+> *Regards Ricky*`; 
                         await sock.sendMessage(sock.user.id, {
 text: desc,
 contextInfo: {
 externalAdReply: {
-title: "PEACE MD",
+title: "RICKY MD",
 thumbnailUrl: "https://files.catbox.moe/n0dgjr.jpg",
-sourceUrl: "https://whatsapp.com/channel/0029VbA9YD323n3ko5xL7J1e",
+sourceUrl: "https://whatsapp.com/channel/0029Vb68QfjADTOJIErjjq3i",
 mediaType: 1,
 renderLargerThumbnail: true
 }  
@@ -111,7 +111,7 @@ contextInfo: {
 externalAdReply: {
 title: "PEACE MD",
 thumbnailUrl: "https://storage.giftedtech.web.id/file/download/sbqQW.jpg",
-sourceUrl: "https://whatsapp.com/channel/0029VbA9YD323n3ko5xL7J1e",
+sourceUrl: "https://whatsapp.com/channel/0029Vb68QfjADTOJIErjjq3i",
 mediaType: 2,
 renderLargerThumbnail: true,
 showAdAttribution: true
