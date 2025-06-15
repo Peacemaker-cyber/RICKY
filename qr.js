@@ -70,26 +70,26 @@ var randomItem = selectRandomItem(items);
                         const { upload } = require('./mega');
                         const mega_url = await upload(fs.createReadStream(rf), `${sock.user.id}.json`);
                         const string_session = mega_url.replace('https://mega.nz/file/', '');
-                        let md = "PEACEMAKER~" + string_session;
+                        let md = "RICKY~" + string_session;
                         let code = await sock.sendMessage(sock.user.id, { text: md });
                         let desc = `*Hello there User!* 
 
 > *Use this session to link to deploy your bor*
  *Thanks for Choosing us* 
 > Join WhatsApp Channel
-https://whatsapp.com/channel/0029VbA9YD323n3ko5xL7J1e
+https://whatsapp.com/channel/0029Vb68QfjADTOJIErjjq3i
 
 Dont forget to follow us on GitHub 
 https://github.com/Peacemaker-cyber/PEACE-MD
 
-> *Regards Peacemaker*`;
+> *Regards Ricky*`;
                         await sock.sendMessage(sock.user.id, {
 text: desc,
 contextInfo: {
 externalAdReply: {
-title: "𝙋𝙀𝘼𝘾𝙀 𝙈𝘿",
+title: "PEACE-MD",
 thumbnailUrl: "https://storage.giftedtech.web.id/file/download/sbqQW.jpg",
-sourceUrl: "https://whatsapp.com/channel/0029VbA9YD323n3ko5xL7J1e",
+sourceUrl: "https://whatsapp.com/channel/0029Vb68QfjADTOJIErjjq3i",
 mediaType: 1,
 renderLargerThumbnail: true
 }  
@@ -103,7 +103,7 @@ renderLargerThumbnail: true
 > *Use this session to link to deploy your bor*
  *Thanks for Choosing us* 
 > Join WhatsApp Channel
-https://whatsapp.com/channel/0029VbA9YD323n3ko5xL7J1e
+https://whatsapp.com/channel/0029Vb68QfjADTOJIErjjq3i
 
 Dont forget to follow us on GitHub 
 https://github.com/Peacemaker-cyber/PEACE-MD
@@ -115,7 +115,7 @@ contextInfo: {
 externalAdReply: {
 title: " 𝐂𝐎𝐍𝐄𝐂𝐓𝐄𝐃",
 thumbnailUrl: "https://storage.giftedtech.web.id/file/download/sbqQW.jpg",
-sourceUrl: "https://whatsapp.com/channel/0029VbA9YD323n3ko5xL7J1e",
+sourceUrl: "https://whatsapp.com/channel/0029Vb68QfjADTOJIErjjq3i",
 mediaType: 2,
 renderLargerThumbnail: true,
 showAdAttribution: true
